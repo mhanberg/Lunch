@@ -1,0 +1,13 @@
+<% @users.each do |user| %>
+	<div class="row">
+		<div class="col-4">
+			<%= user.email %>
+		</div>
+		<div class="col-4">
+			<%= user.first_name %> <%= user.last_name %>
+		</div>
+		<div class="col-4">
+			<%= user.password_digest %>
+		</div>
+	</div><br>
+<% end %>
