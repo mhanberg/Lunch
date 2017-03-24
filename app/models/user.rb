@@ -1,5 +1,8 @@
 class User < ApplicationRecord
+	has_many :groups_users
+	has_many :groups, through: :groups_users
 	attr_accessor :remember_token
+	attr_accessor :role
 
 	before_save { self.email = email.downcase }
 
@@ -13,10 +16,15 @@ class User < ApplicationRecord
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 6 }
 
+	def full_name
+		first_name + " " + last_name
+	end
+
 	def User.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
 		BCrypt::Password.create(string, cost: cost)
 	end
+
 	# Returns a random token
 	def User.new_token
 		SecureRandom.urlsafe_base64

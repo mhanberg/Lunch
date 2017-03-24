@@ -1,1 +1,11 @@
-<h1 class="center">Lunch, where your day really takes a turn for the worse.</h1>
+<% if !logged_in? %>
+    <%= render 'welcome' %>
+<% else %>
+    <div id='mealCalendar'></div>
+<% end %>
+<script>
+    $(function() {
+        $('#mealCalendar').fullCalendar({
+        });
+    });
+</script>

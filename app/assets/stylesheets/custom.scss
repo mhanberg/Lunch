@@ -1,9 +1,7 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-
-body {
-	padding-top: 60px;
-}
+@import 'fullcalendar';
+@import 'fullcalendar.print';
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -11,7 +9,24 @@ body {
   box-sizing:         border-box;
 }
 
+a, a:visited, a:active {
+  color: inherit;
+  text-decoration: none;
+}
 
+.click-highlight {
+	:hover {
+		background-color: #d2d5db;
+	}
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin:0 auto;
+}
 
 .center {
   text-align: center;
@@ -62,4 +77,18 @@ input {
 #session_remember_me {
   width: auto;
   margin-left: 0;
+}
+
+.little-margin {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.divider {
+	border-bottom: 1px black solid;
+}
+
+.v-centered {
+	height: 37px;
+	line-height: 37px;
 }

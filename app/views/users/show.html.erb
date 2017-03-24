@@ -1,3 +1,10 @@
-<%= @user.email %><br>
-<%= @user.first_name %><br>
-<%= @user.last_name %><br>
+<h2>Profile</h2>
+
+<ul class='list-group'>
+  <li class=list-group-item>
+    <b>Email:</b> <%= @user.email %>
+  </li>
+    <li class=list-group-item>
+      <b>Full Name:</b> <%= @user.full_name %>
+    </li>
+</ul>

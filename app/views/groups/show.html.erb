@@ -1,0 +1,53 @@
+<div class='row'>
+  <h1 class='col-xs center'><%= @group.name %></h1>
+</div>
+<div class='row'>
+  <div class='col-xs-6'>
+    <% if @users.any? %>
+      <h3 class='center'>Members</h3>
+      <table class='table table-striped table-condensed'>
+        <tr>
+          <th>Full Name</th>
+          <th></th>
+        </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.full_name %></td>
+            <td class='center'>
+              <% if user.role != 'Admin' %>
+                <%= form_tag('/DeleteUserFromGroup') do %>
+                  <button type='submit' value='Submit' class='btn btn-default'>Delete</button>
+                  <input type='hidden' name='userId' value='<%= user.id %>'>
+                  <input type='hidden' name='groupId' value='<%= @group.id %>'>
+                <% end %>
+              <% else %>
+                <i class='glyphicon glyphicon-star'></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <div class='row'>
+         <h3 class='col-xs'>This group has no members :(</h3>
+      </div>
+    <% end %>
+  </div>
+  <div class='col-xs-6'>
+    <%= form_tag('/AddUserToGroup') do %>
+      <input type='hidden' name='groupId' value='<%= @group.id %>'>
+      <div class='row'>
+        <div class='col-xs-10 col-xs-offset-2'>
+          <h4 class='center'>Add Member</h4>
+          <span>Email:</span>
+          <div class='row'>
+            <input type='text' name='email' class='form-control'>
+          </div>
+          <div class='row'>
+            <input type='submit' value='Submit' class='btn btn-primary'>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
