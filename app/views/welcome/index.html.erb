@@ -1,11 +1,5 @@
 <% if !logged_in? %>
     <%= render 'welcome' %>
 <% else %>
-    <div id='mealCalendar'></div>
+    
 <% end %>
-<script>
-    $(function() {
-        $('#mealCalendar').fullCalendar({
-        });
-    });
-</script>
