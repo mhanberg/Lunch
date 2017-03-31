@@ -1,0 +1,35 @@
+<%= form_for @meal, html: { id: :mealForm } do |f| %>
+  <% if @meal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
+
+      <ul>
+      <% @meal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class='col-md-10 col-md-offset-2 col-xs-12'>
+    <h4 class='center'>Add Meal</h4>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", required: "true" %>
+
+    <%= f.label :description %>
+    <%= f.text_field :description, class: "form-control", required: "true" %>
+
+    <%= f.label :category %>
+    <select name='meal[category]' class='form-control' required>
+        <option value=''>Select a meal type...</option>
+        <option value = '1'>Breakfast</option>
+        <option value = '2'>Lunch</option>
+        <option value = '3'>Dinner</option>
+    </select>
+
+    <%= f.label :meal_date %>
+    <input name='meal[meal_date]' type="text" data-provide='datepicker' data-date-format="yyyy/mm/dd"class='form-control' required>
+    <%= f.hidden_field :group_id, :value => @group.id %>
+
+    <%= f.submit class: "btn btn-primary"%>
+  </div>
+<% end %>

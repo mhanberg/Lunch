@@ -14,6 +14,9 @@ class GroupsController < ApplicationController
     end
 
     @users.order(:role)
+    @meal = Meal.new
+    @meals = @group.meals.order(:meal_date)
+    puts @meals.count
   end
 
   def new

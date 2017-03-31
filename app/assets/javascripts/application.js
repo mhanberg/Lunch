@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require moment.min
 //= require fullcalendar
+//= require bootstrap-datepicker
 //= require_tree .

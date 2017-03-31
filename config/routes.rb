@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post '/AddUserToGroup', to: 'groups#AddUserToGroup'
   post '/DeleteUserFromGroup', to: 'groups#DeleteUserFromGroup'
   resources :users
+  resources :meals
 end

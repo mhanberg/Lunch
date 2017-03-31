@@ -17,19 +17,22 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meal = Meal.create(meal_params)
+    @meal = Meal.create(meals_params)
 
     if @meal.save
-      redirect_to @meal
+      flash[:success] = "Successfully added meal!"
+      redirect_to Group.find(params[:meal][:group_id])
     else
-      render 'new'
+      flash[:danger] = "Failed to add meal!"
+      redirect_to Group.find(params[:meal][:group_id])
     end
   end
 
   def update
-    @meal = Mal.find(params[:id])
+    @meal = Meal.find(params[:id])
 
-    if @meal.update(meal_params)
+    if @meal.update(meals_params)
+      flash[:success] = "Successfully updated meal!"
       redirect_to @meal
     else
       render 'edit'
@@ -45,7 +48,7 @@ class MealsController < ApplicationController
 
   private
     def meals_params
-      params.require(:meal).permit(:name, :description, :type, :group_id, :meal_date)
+      params.require(:meal).permit(:name, :description, :category, :group_id, :meal_date)
     end
-  end
+
 end
