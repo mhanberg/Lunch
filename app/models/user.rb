@@ -46,4 +46,9 @@ class User < ApplicationRecord
 	def forget
 		update_attribute(:remember_digest, nil)
 	end
+
+	#returns whether or not the user is an admin of the current group
+	def admin?(group_id)
+		self.groups_users.exists?(group_id: group_id, role: "Admin")
+	end
 end

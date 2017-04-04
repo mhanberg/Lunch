@@ -2,7 +2,7 @@
   <h1 class='col-xs center'><%= @group.name %></h1>
 </div>
 <div class='row'>
-  <div class='col-md-6 col-xs-12'>
+  <div class='<%= current_user.admin?(@group.id) ? "col-md-6": " col-md-offset-3 col-md-6" %> col-xs-12'>
     <div class='row'>
       <% if @users.any? %>
         <h3 class='center'>Members</h3>
@@ -15,13 +15,13 @@
             <tr>
               <td><%= user.full_name %></td>
               <td class='center'>
-                <% if user.role != 'Admin' %>
+                <% if user.role != 'Admin' && current_user.admin?(@group.id) %>
                   <%= form_tag('/DeleteUserFromGroup') do %>
                     <button type='submit' value='Submit' class='btn btn-default'>Delete</button>
                     <input type='hidden' name='userId' value='<%= user.id %>'>
                     <input type='hidden' name='groupId' value='<%= @group.id %>'>
                   <% end %>
-                <% else %>
+                <% elsif user.role == 'Admin' %>
                   <i class='glyphicon glyphicon-star'></i>
                 <% end %>
               </td>
@@ -58,20 +58,22 @@
       <% end %>
     </div>
   </div>
-  <div class='col-md-6 col-xs-12'>
-    <div class='row'>
-      <%= form_tag('/AddUserToGroup') do %>
-        <input type='hidden' name='groupId' value='<%= @group.id %>'>
-        <div class='col-md-10 col-md-offset-2 col-xs-12'>
-          <h4 class='center'>Add Member</h4>
-          <label for='email'>Email:</label>
-          <input type='text' name='email' class='form-control'>
-          <input type='submit' value='Submit' class='btn btn-primary'>
-        </div>
-      <% end %>
+  <% if current_user.admin?(@group.id) %>
+    <div class='col-md-6 col-xs-12'>
+      <div class='row'>
+        <%= form_tag('/AddUserToGroup') do %>
+          <input type='hidden' name='groupId' value='<%= @group.id %>'>
+          <div class='col-md-10 col-md-offset-2 col-xs-12'>
+            <h4 class='center'>Add Member</h4>
+            <label for='email'>Email:</label>
+            <input type='text' name='email' class='form-control'>
+            <input type='submit' value='Submit' class='btn btn-primary'>
+          </div>
+        <% end %>
+      </div>
+      <div class='row'>
+        <%= render partial: "meals/form",  object: @group %>
+      </div>
     </div>
-    <div class='row'>
-      <%= render partial: "meals/form",  object: @group %>
-    </div>
-  </div>
+  <% end %>
 </div>
