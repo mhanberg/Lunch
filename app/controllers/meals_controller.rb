@@ -46,6 +46,10 @@ class MealsController < ApplicationController
     redirect_to meals_path
   end
 
+  def calendar
+    render :json => Meal.all.as_json
+  end
+
   private
     def meals_params
       params.require(:meal).permit(:name, :description, :category, :group_id, :meal_date)

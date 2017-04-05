@@ -1,5 +1,8 @@
-<div class='jumbotron'>
-    <div class='container'>
-        <p> Hello, <%= @user.full_name %> </p>
-    </div>
-</div>
+<div id='mealCalendar'></div>
+<script>
+    $(function() {
+        $('#mealCalendar').fullCalendar({
+            events: '/calendar'
+        });
+    })
+</script>
