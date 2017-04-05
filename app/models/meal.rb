@@ -8,10 +8,12 @@ class Meal < ApplicationRecord
       meal = meal.as_json
 
       meal["title"] = meal["name"]
-      if meal["category"] = 2
+      if meal["category"] == "Breakfast"
+        meal["start"] = meal["meal_date"].to_s + " 06:00:00"
+      elsif meal["category"] == "Lunch"
         meal["start"] = meal["meal_date"].to_s + " 11:00:00"
       else
-        meal["start"] = meal["meal_date"].to_s + " 05:30:00"
+        meal["start"] = meal["meal_date"].to_s + " 17:30:00"
       end
       meals_json << meal
     end
