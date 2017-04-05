@@ -47,7 +47,8 @@ class MealsController < ApplicationController
   end
 
   def calendar
-    render :json => Meal.all.as_json
+    
+    render :json => Meal.convert_to_calendar_json(Meal.all)
   end
 
   private
