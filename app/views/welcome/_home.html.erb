@@ -1,8 +1,15 @@
+<div id='mealModal'></div>
 <div id='mealCalendar'></div>
 <script>
     $(function() {
         $('#mealCalendar').fullCalendar({
-            events: '/calendar'
+            events: '/calendar',
+            eventClick: function(event) {
+                $('#mealModal').replaceWith('<%= j render 'meals/meal-modal' %>');
+                $('#mealModal .modal-title').html(event.title);
+                $('#mealModal .modal-body').html('<p>' + event.description + '</p>');
+                $('#mealModal').modal('show');
+            }
         });
     })
 </script>
