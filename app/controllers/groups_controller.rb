@@ -6,14 +6,14 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @users = @group.users
-    @users.each do |user|
+    users = @group.users
+    users.each do |user|
       if @u = GroupsUser.find_by(group_id: @group.id, user_id: user.id)
         user.role = @u.role
       end
     end
 
-    @users.order(:role)
+    @users = users.sort_by(&:role)
     @meal = Meal.new
     @meals = @group.meals.order(:meal_date)
   end
