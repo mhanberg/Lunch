@@ -22,3 +22,5 @@
 
 # Ignore the mac .DS_Store files
 .DS_Store
+
+.ruby-version
