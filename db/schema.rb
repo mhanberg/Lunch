@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404224128) do
+ActiveRecord::Schema.define(version: 20170415183803) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 20170404224128) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.date     "meal_date"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "meal_id"
+    t.integer "user_id"
+    t.integer "score"
+    t.text    "comment"
+    t.index ["meal_id", "user_id"], name: "index_ratings_on_meal_id_and_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

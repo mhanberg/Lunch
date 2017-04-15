@@ -1,5 +1,6 @@
 class Meal < ApplicationRecord
   belongs_to :group
+  has_many :ratings
   enum category: [ :None, :Breakfast, :Lunch, :Dinner ]
 
   def Meal.convert_to_calendar_json(meals)
