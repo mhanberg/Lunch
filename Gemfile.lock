@@ -41,6 +41,7 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (6.7.7.2)
       execjs
+    awesome_print (1.7.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
     bootstrap-datepicker-rails (1.6.4.1)
@@ -163,6 +164,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  awesome_print
   bcrypt (~> 3.1.11)
   bootstrap-datepicker-rails
   bootstrap-sass (= 3.3.6)
