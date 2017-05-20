@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.4.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -47,6 +48,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'awesome_print'
+end
+
+group :test do
+  gem 'rake'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
