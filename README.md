@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mhanberg/Lunch.svg?branch=master)](https://travis-ci.org/mhanberg/Lunch)
+
 # Lunch
 
 ## What does it do?
