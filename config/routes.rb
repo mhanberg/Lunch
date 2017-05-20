@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   post '/DeleteUserFromGroup', to: 'groups#DeleteUserFromGroup'
   resources :users
   resources :meals
+  resources :ratings
   get '/calendar/', to: 'meals#calendar'
 end
