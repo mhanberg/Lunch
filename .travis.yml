@@ -1,5 +1,5 @@
 language: ruby
-os: trusty
+dist: trusty
 services:
   - postgresql
 addons:
