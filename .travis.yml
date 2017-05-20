@@ -4,7 +4,8 @@ services:
 addons:
   postgresql: "9.6"
 before_script:
-  - psql -c 'create database test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
 deploy:
   provider: heroku
   app: rocky-castle-27614
