@@ -6,9 +6,21 @@
             events: '/calendar',
             eventClick: function(event) {
                 $('#mealModal').replaceWith('<%= j render 'meals/meal-modal' %>');
-                $('#mealModal .modal-title').html(event.title);
-                $('#mealModal .modal-body').html('<p>' + event.description + '</p>');
-                $('#mealModal').modal('show');
+                const url = event.rating ? "ratings/" + event.rating.id + "/edit" : "ratings/new";
+                $.ajax({
+                    method: 'get',
+                    url: url,
+                    dataType: 'html',
+                    success: function(data) {
+                        $('#mealModal .modal-body').append(data);
+                        $('#rating_meal_id').val(event.id);
+                        $('#mealModal .modal-title').html(event.title);
+                        $('#mealModal').modal('show');
+                    },
+                    error: function() {
+                        alert("Fail! You suck!");
+                    }
+                });
             }
         });
     })

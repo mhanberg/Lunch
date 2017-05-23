@@ -5,39 +5,40 @@ class RatingsController < ApplicationController
 
 	def new
         @rating = Rating.new
+        render layout: false
 	end
 
 	def create
         @rating = Rating.create(ratings_params)
-        meal = Meal.find(params[:rating][:meal_id])
 
         if @rating.save
             flash[:success] = "Successfully left rating!"
-            redirect_to meal
+            redirect_to root_path
         else
             flash[:danger] = "Failed to leave rating :("
-            redirect_to meal
+            redirect_to root_path
         end
 	end
 
     def edit
         @rating = Rating.find(params[:id])
+        render layout: false
     end
 
     def update
-        @rating = rating.find(params[:id])
+        @rating = Rating.find(params[:id])
 
         if @rating.update(ratings_params)
             flash[:success] = "Successfully updated rating!"
-            redirect_to Meal.find(params[:rating][:meal_id])
+            redirect_to root_path
         else
             flash[:danger] = "Failed to update rating :("
-            render 'edit'
+            redirect_to root_path
         end
     end
 
 	private
 		def ratings_params
-			params.require(:rating).permit(:meal_id, :user_id, :rating, :comment)
+			params.require(:rating).permit(:meal_id, :user_id, :score, :comment)
 		end
 end
