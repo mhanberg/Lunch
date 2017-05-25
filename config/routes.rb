@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :users
   resources :meals
   resources :ratings
+  resources :metrics, only: :index
   get '/calendar/', to: 'meals#calendar'
 end
