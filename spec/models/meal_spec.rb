@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'ap'
 
 describe Meal do
     context 'calendar' do
