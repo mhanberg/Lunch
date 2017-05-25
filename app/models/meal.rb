@@ -1,7 +1,7 @@
 class Meal < ApplicationRecord
   belongs_to :group
   has_many :ratings
-  enum category: [ :None, :Breakfast, :Lunch, :Dinner ]
+  enum category: { Breakfast: 1, Lunch: 2, Dinner: 3 }
 
   def Meal.convert_to_calendar_json(meals, user_id)
     meals_json = []
@@ -18,7 +18,7 @@ class Meal < ApplicationRecord
       end
       meal["rating"] = Rating.exists?(meal_id: meal["id"], user_id: user_id)
       if meal["rating"]
-        meal["rating"] = Rating.where(meal_id: meal['id'], user_id: user_id).take
+        meal["rating"] = Rating.where(meal_id: meal['id'], user_id: user_id).take.as_json
       end
       
       meals_json << meal

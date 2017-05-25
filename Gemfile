@@ -38,6 +38,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav' 
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
 end
 
 group :development do
