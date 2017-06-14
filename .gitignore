@@ -22,3 +22,8 @@
 
 # Ignore the mac .DS_Store files
 .DS_Store
+
+# Ignore npm
+/node_modules
+/public/webpack
+/public/packs
