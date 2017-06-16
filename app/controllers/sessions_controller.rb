@@ -20,4 +20,14 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     redirect_to root_url
   end
+
+  def console
+    toggle_console
+    redirect_to root_url
+  end
+
+  def debug
+    toggle_debug
+    redirect_to root_url
+  end
 end

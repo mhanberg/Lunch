@@ -3,6 +3,8 @@ module SessionsHelper
 	#Logs in the given user
 	def log_in(user)
 		session[:user_id] = user.id
+		session[:console] = true
+		session[:debug] = true
 	end
 
 	# Remembers a user in a persistent session
@@ -42,5 +44,21 @@ module SessionsHelper
 		forget(current_user)
 		session.delete(:user_id)
 		@current_user = nil
+	end
+
+	def toggle_console
+		session[:console] = !session[:console]
+	end
+
+	def toggle_debug
+		session[:debug] = !session[:debug]
+	end
+
+	def console?
+		session[:console]
+	end
+
+	def debug?
+		session[:debug]
 	end
 end

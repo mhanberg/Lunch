@@ -23,6 +23,12 @@
 								<li><%= link_to "My Groups", groups_path %></li>
 								<li class='divider'></li>
 								<li><%= link_to "Log out", logout_path %></li>
+								<% if Rails.env.development? %>
+									<li class='divider'></li>
+									<li><%= link_to "Toggle Debug window", debug_path %>
+									<li class='divider'></li>
+									<li><%= link_to "Toggle web console", console_path %>
+								<% end %>
 							</ul>
 						</li>
 					<% else %>

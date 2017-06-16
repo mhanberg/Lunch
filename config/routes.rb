@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get '/console', to: 'sessions#console'
+  get '/debug', to: 'sessions#debug'
   post '/AddUserToGroup', to: 'groups#AddUserToGroup'
   post '/DeleteUserFromGroup', to: 'groups#DeleteUserFromGroup'
   resources :users
