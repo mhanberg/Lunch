@@ -5,7 +5,14 @@ class MetricsService
     
     def meals_average
         ratings = @meals.map { |meal| meal.ratings }.to_a.flatten
-        @avg = avg(ratings)
+
+        avg = avg(ratings)
+        unless avg.nan?
+            avg
+        else
+            "No score available"
+        end
+
     end
     
     private
