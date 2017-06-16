@@ -47,7 +47,9 @@ class MealsController < ApplicationController
   end
 
   def calendar
-    render :json => Meal.convert_to_calendar_json(Meal.all, current_user.id)
+    my_group_ids = Meal.where(group_id: current_user.groups.map { |m| m.id })
+
+    render json: Meal.convert_to_calendar_json(my_group_ids, current_user.id)
   end
 
   private
