@@ -22,6 +22,7 @@ class RatingsController < ApplicationController
 
     def edit
         @rating = Rating.find(params[:id])
+        @average = MetricsService.new(@rating.meal).meals_average
         render layout: false
     end
 

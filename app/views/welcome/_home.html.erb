@@ -8,7 +8,7 @@
             height: 750,
             eventClick: function(event) {
                 $('#mealModal').replaceWith('<%= j render 'meals/meal-modal' %>');
-                const url = event.rating ? "ratings/" + event.rating.id + "/edit" : "ratings/new";
+                const url = event.rating ? `ratings/${event.rating.id}/edit` : "ratings/new";
                 $.ajax({
                     method: 'get',
                     url: url,
