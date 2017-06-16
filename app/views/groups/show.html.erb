@@ -1,79 +1,84 @@
 <div class='row'>
-  <h1 class='col-xs center'><%= @group.name %></h1>
+  <h1 class='col-xs-12 center'><%= @group.name %></h1>
 </div>
 <div class='row'>
-  <div class='<%= current_user.admin?(@group.id) ? "col-md-6": " col-md-offset-3 col-md-6" %> col-xs-12'>
-    <div class='row'>
-      <% if @users.any? %>
-        <h3 class='center'>Members</h3>
-        <table class='table table-striped table-condensed'>
-          <tr>
-            <th>Full Name</th>
-            <th></th>
-          </tr>
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= user.full_name %></td>
-              <td class='center'>
-                <% if user.role != 'Admin' && current_user.admin?(@group.id) %>
-                  <%= form_tag('/DeleteUserFromGroup') do %>
-                    <button type='submit' value='Submit' class='btn btn-default'>Delete</button>
-                    <input type='hidden' name='userId' value='<%= user.id %>'>
-                    <input type='hidden' name='groupId' value='<%= @group.id %>'>
-                  <% end %>
-                <% elsif user.role == 'Admin' %>
-                  <i class='glyphicon glyphicon-star'></i>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-      <% else %>
-        <div class='row'>
-          <h3 class='col-xs'>This group has no members :(</h3>
-        </div>
-      <% end %>
-    </div>
-    <div class='row'>
-      <% if @meals.any? %>
-        <h3 class='center'>Meals</h3>
-        <table class='table table-striped table-condensed'>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Date</th>
-          </tr>
-          <% @meals.each do |meal| %>
-            <tr>
-              <td><%= meal.name %></td>
-              <td><%= meal.description %></td>
-              <td><%= meal.category %></td>
-              <td><%= meal.meal_date %></td>
-            </tr>
-          <% end %>
-        </table>
-      <% else %>
-        <h3>This group has no meals scheduled ¯\_(ツ)_/¯</h3>
-      <% end %>
-    </div>
+  <div class='col-md-6 col-xs-12'>
+    <h3 class='center'>Metrics</h3>
+    <table class='table table-striped table-condensed'>
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+      <tr>
+        <td>Average</td>
+        <td><%= @average %></td>
+      </tr>
+    </table>
   </div>
-  <% if current_user.admin?(@group.id) %>
-    <div class='col-md-6 col-xs-12'>
-      <div class='row'>
-        <%= form_tag('/AddUserToGroup') do %>
-          <input type='hidden' name='groupId' value='<%= @group.id %>'>
-          <div class='col-md-10 col-md-offset-2 col-xs-12'>
-            <h4 class='center'>Add Member</h4>
-            <label for='email'>Email:</label>
-            <input type='text' name='email' class='form-control'>
-            <input type='submit' value='Submit' class='btn btn-primary'>
-          </div>
+  <div class='col-md-6 col-xs-12'>
+    <% if current_user.admin?(@group.id) %>
+      <%= form_tag('/AddUserToGroup') do %>
+        <input type='hidden' name='groupId' value='<%= @group.id %>'>
+        <h4 class='center'>Add Member</h4>
+        <label for='email'>Email:</label>
+        <input type='text' name='email' class='form-control'>
+        <input type='submit' value='Submit' class='btn btn-primary'>
+      <% end %>
+      <%= render partial: "meals/form",  object: @group %>
+    <% end %>
+  </div>
+<div>
+<div class='row'>
+  <div class='col-md-6 col-xs-12'>
+    <% if @users.any? %>
+      <h3 class='center'>Members</h3>
+      <table class='table table-striped table-condensed'>
+        <tr>
+          <th>Full Name</th>
+          <th></th>
+        </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.full_name %></td>
+            <td class='center'>
+              <% if user.role != 'Admin' && current_user.admin?(@group.id) %>
+                <%= form_tag('/DeleteUserFromGroup') do %>
+                  <button type='submit' value='Submit' class='btn btn-default'>Delete</button>
+                  <input type='hidden' name='userId' value='<%= user.id %>'>
+                  <input type='hidden' name='groupId' value='<%= @group.id %>'>
+                <% end %>
+              <% elsif user.role == 'Admin' %>
+                <i class='glyphicon glyphicon-star'></i>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
-      </div>
-      <div class='row'>
-        <%= render partial: "meals/form",  object: @group %>
-      </div>
-    </div>
-  <% end %>
+      </table>
+    <% else %>
+      <h3 class='col-xs-12'>This group has no members :(</h3>
+    <% end %>
+  </div>
+  <div class='col-md-6 col-xs-12'>
+    <% if @meals.any? %>
+      <h3 class='center'>Meals</h3>
+      <table class='table table-striped table-condensed'>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Date</th>
+        </tr>
+        <% @meals.each do |meal| %>
+          <tr>
+            <td><%= meal.name %></td>
+            <td><%= meal.description %></td>
+            <td><%= meal.category %></td>
+            <td><%= meal.meal_date %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <h3>This group has no meals scheduled ¯\_(ツ)_/¯</h3>
+    <% end %>
+  </div>
 </div>

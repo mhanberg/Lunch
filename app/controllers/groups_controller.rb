@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
     @users = users.sort_by(&:role)
     @meal = Meal.new
     @meals = @group.meals.order(:meal_date)
+    @average = MetricsService.new(@meals.to_a).meals_average
   end
 
   def new
