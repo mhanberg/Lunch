@@ -23,11 +23,11 @@ class SessionsController < ApplicationController
 
   def console
     toggle_console
-    redirect_to root_url
+    redirect_to :back
   end
 
   def debug
     toggle_debug
-    redirect_to root_url
+    redirect_to :back
   end
 end
