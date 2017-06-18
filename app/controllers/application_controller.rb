@@ -10,4 +10,11 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
+
+  def dev_only
+    unless Rails.env.development?
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+  
 end
