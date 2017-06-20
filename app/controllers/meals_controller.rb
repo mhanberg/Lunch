@@ -56,5 +56,4 @@ class MealsController < ApplicationController
     def meals_params
       params.require(:meal).permit(:name, :description, :category, :group_id, :meal_date)
     end
-
 end

@@ -16,7 +16,9 @@ class Meal < ApplicationRecord
       else
         meal["start"] = meal["meal_date"].to_s + " 17:30:00"
       end
+
       meal["rating"] = Rating.exists?(meal_id: meal["id"], user_id: user_id)
+      
       if meal["rating"]
         meal["rating"] = Rating.where(meal_id: meal['id'], user_id: user_id).take.as_json
       end
