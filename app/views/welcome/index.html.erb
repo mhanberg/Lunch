@@ -1,5 +1,5 @@
 <% if !logged_in? %>
-    <%= render 'welcome' %>
+  <%= render 'welcome' %>
 <% else %>
-    <%= render 'home', user: @user %>
+  <%= render 'home', user: @user %>
 <% end %>
