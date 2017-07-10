@@ -1,22 +1,22 @@
 class MetricsService
-  def initialize meals
+  def initialize(meals)
     @meals = [meals].flatten
   end
-  
+
   def meals_average
-    ratings = @meals.map { |meal| meal.ratings }.to_a.flatten
+    ratings = @meals.map(&:ratings).to_a.flatten
 
     avg = avg(ratings)
-    unless avg.nan?
-      avg
+    if avg.nan?
+      'No score available'
     else
-      "No score available"
+      avg
     end
-
   end
-  
+
   private
-    def avg ratings
-      (ratings.sum { |r| r.score } / ratings.size.to_f).round(2)
-    end
+
+  def avg(ratings)
+    (ratings.sum(&:score) / ratings.size.to_f).round(2)
+  end
 end
