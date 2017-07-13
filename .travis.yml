@@ -1,16 +1,19 @@
 language: ruby
 dist: trusty
 services:
-  - postgresql
+- postgresql
 addons:
-  postgresql: "9.6"
+  postgresql: '9.6'
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
 deploy:
   provider: heroku
   app: rocky-castle-27614
   api_key:
     secure: j05W1nSeLTNEmDqA3Vquhm11SZyEDV/352mYdUbW0B8TU+CE0uZLD0i2xXm+ph0vyKzSEVeSF1QCSdTIC/57wa+F3YzKYCO8KOHk4SVRkvdnJMnn+wD+DpyIMbmmZ7fqumBmW2biBUEjSb1TlniQ47b8eKAL6vCxnW2tTq31O4p/pkdheHk9cKcj+oLb9r9HWx+43oSzZvsR06rokZ8Qusq++Aoc5UUjk/yUmbEWGVbFYoCpTC2FTteaSQVM+FypX/MCpOZdWgrEUkILud/G4voynX6isbdFREmheaTJHJD+MyMOHTtOBA5sF2N5S3e6Y7gI9o5h2wSeSdVXBXgZZM0DKjJPzn1Rd6Gojf/89sp47MxIKFwkHpkk2eK2k8UQGrPkGLnFBrJZ3sDOBWuhnwKJNmOhmN0/EbSz6yhMIj36TT1F9j/Dfce3kCf0tnUd3SW3mGtjgKRzPvbhyAsoU/8+tIUoa+B2dFvQornROeMsLi/pKnKCGeWtbRPR+dY0sGQTFNJljMto0IwFLrBB1QGEpi+pabpPD/wwpvEaCFsQGEFlXLUvOYanuSKsNJTUAI4baXffNldkAg4GV7vae42jObEc2BSJQdvD8QTEpcBtUag5qkRe9uURGw3xrUqrEkPY+6KFMS4+14L5KW5ahxjTcvZOfaytH5UtNhgZtdw=
   run:
-    - "rails db:migrate"
+  - rails db:migrate
+notifications:
+  slack:
+    secure: MYQk1gMg5Nw3+aTINvtJfS4XeIda8+fH6ypgwyc1SJeBlklfZfn7auj15NSLe1tytOkY0URNLYG9wwwKMtVGFxxTgIx+nxVxVy1Y30AJgt2rRaOWMyBZNJy6ez+TVMeouLrzrSG095JknlCdks1kpeuzfg5SESv4+RkK37y/esXxBPSA0bIiK7VlvXHhNvrqgN/Cu+sYvDDqjnWKN1wXLPRVj+rNJ9tNs3XSZz1AaqMxDq+HOctq+i+DqmFtNk/S3EN0M+QwoxMwOItBWtos9b/1pMnSmQ7b1ABO2lkH/5JoQVlKVF1+0HjMzeVRUmBObZjOguE9miduYUSPpFqWgLtJoSxAwLYK6/QDLptRrV8Wd9jIywTggwYHIWlUk8Fiv4uohqrvrvTYT0Kfw4NE1LgKQ+Zn/8wsZa3hcUehumczzPe4qKUiV815VlTmYrNVd59VnDJnxt7d9/UUfYHa3UE7WzP73HW3Uo8SeMFJyXtZkGutlTAdyOfEaC5WEG63IZdnUqBmEh1iFtrECYrBGDCG2mSpkClEAtiS31VDdmdRHyZ17+2Q5Yj0SEE+FkeVX/E5tStOhYa+Pha+9A9lnWbhxAuREIGd7MaosJvYqWERaf0Uia6E46lOsw5Jiv8EsrBGOl2R3cCZXuy/jAQAhjkJoCnaQHOchImTSwdKMUY=
