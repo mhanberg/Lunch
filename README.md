@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mhanberg/Lunch.svg?branch=master)](https://travis-ci.org/mhanberg/Lunch)
+[![Inline docs](http://inch-ci.org/github/mhanberg/lunch.svg?branch=master)](http://inch-ci.org/github/mhanberg/lunch)
 
 # Lunch
 
