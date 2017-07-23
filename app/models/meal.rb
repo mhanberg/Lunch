@@ -3,7 +3,7 @@ class Meal < ApplicationRecord
   has_many :ratings
   enum category: { Breakfast: '1', Lunch: '2', Dinner: '3' }
 
-  def Meal.convert_to_calendar_json(meals, user_id)
+  def self.convert_to_calendar_json(meals, user_id)
     meals_json = []
     meals.each do |meal|
       meal = meal.as_json
@@ -18,14 +18,14 @@ class Meal < ApplicationRecord
       end
 
       meal["rating"] = Rating.exists?(meal_id: meal["id"], user_id: user_id)
-      
+
       if meal["rating"]
         meal["rating"] = Rating.where(meal_id: meal['id'], user_id: user_id).take.as_json
       end
-      
+
       meals_json << meal
     end
     @meals_json = meals_json
   end
-  
+
 end

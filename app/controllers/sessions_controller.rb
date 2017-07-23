@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
-  
-  def new
-  end
+  skip_before_action :require_login, only: %i[new create]
+
+  def new; end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
@@ -11,7 +10,7 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to root_path
     else
-      flash[:danger] = 'Invalid email/password combo'
+      flash[:danger] = 'Invalid email/password combination'
       render 'new'
     end
   end

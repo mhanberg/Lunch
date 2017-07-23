@@ -1,5 +1,4 @@
 class MealsController < ApplicationController
-
   def index
     @meals = Meal.all
   end
@@ -20,19 +19,18 @@ class MealsController < ApplicationController
     @meal = Meal.create(meals_params)
 
     if @meal.save
-      flash[:success] = "Successfully added meal!"
-      redirect_to Group.find(params[:meal][:group_id])
+      flash[:success] = 'Successfully added meal!'
     else
-      flash[:danger] = "Failed to add meal!"
-      redirect_to Group.find(params[:meal][:group_id])
+      flash[:danger] = 'Failed to add meal!'
     end
+    redirect_to Group.find(params[:meal][:group_id])
   end
 
   def update
     @meal = Meal.find(params[:id])
 
     if @meal.update(meals_params)
-      flash[:success] = "Successfully updated meal!"
+      flash[:success] = 'Successfully updated meal!'
       redirect_to @meal
     else
       render 'edit'
@@ -42,7 +40,7 @@ class MealsController < ApplicationController
   def destroy
     @meal = Meal.find(params[:id])
     @meal.destroy
-    
+
     redirect_to meals_path
   end
 
@@ -56,7 +54,8 @@ class MealsController < ApplicationController
   end
 
   private
-    def meals_params
-      params.require(:meal).permit(:name, :description, :category, :group_id, :meal_date)
-    end
+
+  def meals_params
+    params.require(:meal).permit(:name, :description, :category, :group_id, :meal_date)
+  end
 end
