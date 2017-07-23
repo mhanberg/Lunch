@@ -1,5 +1,64 @@
-<% if !logged_in? %>
-  <%= render 'welcome' %>
-<% else %>
-  <%= render 'home', user: @user %>
-<% end %>
+<div id='mealModal'></div>
+ <div class='row'>
+  <div class='col-xs-3'>
+    <div id='todayCalendar'></div>
+  </div>
+  <div class='col-xs-3'>
+    <div id='yesterdayCalendar'></div>
+  </div>
+  <div class='col-xs-3'>
+    <canvas id='pie' height='200' width='200'></canvas>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('#todayCalendar').fullCalendar({
+        events: '/calendar',
+        defaultView: 'basicDay',
+        header: { left: 'title', center: false, right: false },
+        height: 'auto',
+        eventClick: function(e) { openModal(e); }
+    });
+
+    $('#yesterdayCalendar').fullCalendar({
+      events: '/calendar',
+      defaultView: 'basicDay',
+      header: { left: 'title', center: false, right: false },
+      height: 'auto',
+      eventClick: function(e) { openModal(e); }
+    })
+    .fullCalendar('prev');
+
+    var ctx = $('#pie');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        datasets: [{
+            data: [10, 20, 100],
+             backgroundColor: ['#2A9D8F', '#EF8275', '#2E86AB']
+        }],
+        labels: ['Red', 'Yellow', 'Blue']
+      }
+    })
+  })
+
+  function openModal(event) {
+    $('#mealModal').replaceWith('<%= j render 'meals/meal-modal' %>');
+    const url = event.rating ? `ratings/${event.rating.id}/edit` : "ratings/new";
+    $.ajax({
+      method: 'get',
+      url: url,
+      dataType: 'html',
+      success: function(data) {
+        $('#mealModal .modal-body').append(data);
+        $('#rating_meal_id').val(event.id);
+        $('#mealModal .modal-title').html(event.title);
+        $('#mealModal').modal('show');
+      },
+      error: function() {
+        alert("Fail! You suck!");
+      }
+    });
+  }
+</script>

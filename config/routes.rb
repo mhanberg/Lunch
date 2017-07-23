@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :groups
   root 'welcome#index'
+  get '/welcome', to: 'welcome#welcome'
 
   get '/signup', to: 'users#new'
   get '/login', to: 'sessions#new'
