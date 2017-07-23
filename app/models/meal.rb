@@ -1,7 +1,11 @@
 class Meal < ApplicationRecord
   belongs_to :group
   has_many :ratings
-  enum category: { Breakfast: '1', Lunch: '2', Dinner: '3' }
+  enum category: { Breakfast: 1, Lunch: 2, Dinner: 3 }
+
+  def category=(val)
+    write_attribute :category, val.to_i
+  end
 
   def self.convert_to_calendar_json(meals, user_id)
     meals_json = []
