@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 names = [
   {'first': 'Slade', 'last': 'Larsen'},
   {'first': 'Joshua', 'last': 'Albert'},
@@ -72,4 +64,8 @@ meals = [
 (0..90).each do |n|
   meal = meals[n % 11]
   Meal.create(name: meal[:name], description: meal[:description], category: meal[:category], group_id: n % 2 == 0 ? @group1[:id] : @group2[:id], meal_date: Date.today + n)
+end
+
+Meal.all.each do |m|
+  Rating.create(meal: m, user: m.group.users.first, score: rand(5))
 end
