@@ -32,4 +32,42 @@ describe MetricsService do
       expect(MetricsService.new(@meals[2]).meals_average).to eq('No score available')
     end
   end
+
+  context 'pie chart' do
+    it 'calculates it right' do
+      meal = create :meal
+      rating = create :rating, score: 2, meal: meal
+
+      expected_chart = {
+        'no_response' => 0,
+        '0' => 0,
+        '1' => 0,
+        '2' => 1,
+        '3' => 0,
+        '4' => 0
+      }
+
+      result = MetricsService.new(meal).available_responses_pie_chart
+
+      expect(result).to eq(expected_chart)
+    end
+
+    it 'accounts for lack of responses' do
+      meals = create_list :meal, 3
+      rating = create :rating, score: 2, meal: meals[0]
+
+      expected_chart = {
+        'no_response' => 2,
+        '0' => 0,
+        '1' => 0,
+        '2' => 1,
+        '3' => 0,
+        '4' => 0
+      }
+
+      result = MetricsService.new(meals).available_responses_pie_chart
+
+      expect(result).to eq(expected_chart)
+    end
+  end
 end
