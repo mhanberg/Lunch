@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/debug', to: 'sessions#debug'
 
 
-  resources :users
+  resources :users, only: [:new, :create]
   resources :meals
   get '/calendar', to: 'meals#calendar'
   resources :ratings
