@@ -1,5 +1,5 @@
 class MetricsController < ApplicationController
-  def index
-    @average = MetricsService.new(Meal.all.to_a).meals_average
+  def response_pie
+    render json: MetricsService.new(Meal.all.to_a).available_responses_pie_chart
   end
 end

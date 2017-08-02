@@ -30,18 +30,34 @@
     })
     .fullCalendar('prev');
 
-    var ctx = $('#pie');
-    var myChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        datasets: [{
-            data: [10, 20, 100],
-             backgroundColor: ['#2A9D8F', '#EF8275', '#2E86AB']
-        }],
-        labels: ['Red', 'Yellow', 'Blue']
+    $.ajax({
+      method: 'get',
+      url: '/response_pie',
+      success: function(data) {
+        var ctx = $('#pie');
+        var myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            datasets: [{
+                data: [
+                  data['no_response'],
+                  data['0'],
+                  data['1'],
+                  data['2'],
+                  data['3'],
+                  data['4']
+                ],
+                backgroundColor: ['#FF0000', '#4B0082', '#0000FF', '#00FF00', '#FFFF00', '#FF7F00']
+            }],
+            labels: ['No Response', 'Awful', 'Bad', 'Meh', 'Good', 'Amazing']
+          }
+        });
+      },
+      error: function() {
+        console.log("Reponse pie ajax failed dude");
       }
-    })
-  })
+    });
+  });
 
   function openModal(event) {
     $('#mealModal').replaceWith('<%= j render 'meals/meal-modal' %>');

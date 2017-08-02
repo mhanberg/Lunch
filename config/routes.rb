@@ -19,5 +19,6 @@ Rails.application.routes.draw do
   resources :meals
   get '/calendar', to: 'meals#calendar'
   resources :ratings
-  resources :metrics, only: :index
+
+  get '/response_pie', to: 'metrics#response_pie'
 end
