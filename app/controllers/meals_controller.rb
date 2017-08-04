@@ -48,7 +48,7 @@ class MealsController < ApplicationController
     meals = Meal.where(
       group_id: current_user.groups.map(&:id),
       meal_date: (params[:start]..params[:end])
-    )
+    ).includes(:ratings)
 
     render json: Meal.convert_to_calendar_json(meals, current_user.id)
   end
