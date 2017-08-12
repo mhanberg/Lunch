@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get '/console', to: 'sessions#console'
   get '/debug', to: 'sessions#debug'
 
-
   resources :users, only: [:new, :create]
   resources :meals
   get '/calendar', to: 'meals#calendar'

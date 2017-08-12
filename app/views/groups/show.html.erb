@@ -17,7 +17,7 @@
   </div>
   <div class='col-md-6 col-xs-12'>
     <% if current_user.admin?(@group.id) %>
-      <%= form_tag('/AddUserToGroup') do %>
+      <%= form_tag('/add_user_to_group') do %>
         <input type='hidden' name='groupId' value='<%= @group.id %>'>
         <h4 class='center'>Add Member</h4>
         <label for='email'>Email:</label>
@@ -41,13 +41,13 @@
           <tr>
             <td><%= user.full_name %></td>
             <td class='center'>
-              <% if user.role != 'Admin' && current_user.admin?(@group.id) %>
-                <%= form_tag('/DeleteUserFromGroup') do %>
+              <% if user.groups_users.find_by(group: @group).role != 'Admin' && current_user.admin?(@group.id) %>
+                <%= form_tag('/delete_user_from_group') do %>
                   <button type='submit' value='Submit' class='btn btn-default'>Delete</button>
                   <input type='hidden' name='userId' value='<%= user.id %>'>
                   <input type='hidden' name='groupId' value='<%= @group.id %>'>
                 <% end %>
-              <% elsif user.role == 'Admin' %>
+              <% elsif user.groups_users.find_by(group: @group).role == 'Admin' %>
                 <i class='glyphicon glyphicon-star'></i>
               <% end %>
             </td>
