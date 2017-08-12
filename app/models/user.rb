@@ -12,22 +12,28 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 50 }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  validates :email,
+            presence: true,
+            length: { maximum: 255 },
+            format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password,
+            presence: true,
+            length: { minimum: 6 }
 
   def full_name
-    first_name + " " + last_name
+    "#{first_name} #{last_name}"
   end
 
-  def User.digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
   # Returns a random token
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -48,8 +54,8 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  #returns whether or not the user is an admin of the current group
+  # Returns whether or not the user is an admin of the current group
   def admin?(group_id)
-    self.groups_users.exists?(group_id: group_id, role: "Admin")
+    groups_users.exists?(group_id: group_id, role: 'Admin')
   end
 end
