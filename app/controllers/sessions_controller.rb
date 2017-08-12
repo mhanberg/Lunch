@@ -22,11 +22,11 @@ class SessionsController < ApplicationController
 
   def console
     toggle_console
-    redirect_to :back
+    redirect_back(fallback_location: root_url)
   end
 
   def debug
     toggle_debug
-    redirect_to :back
+    redirect_back(fallback_location: root_url)
   end
 end
