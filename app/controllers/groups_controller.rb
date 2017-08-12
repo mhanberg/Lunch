@@ -10,7 +10,10 @@ class GroupsController < ApplicationController
                   .find(params[:id])
     @users = @group.users
                    .order('groups_users.role DESC')
-                   .map { |u| u.role = u.groups_users.find_by(group: @group).role }
+                   .map { |u|
+                      u.role = u.groups_users.find_by(group: @group).role
+                      u
+                   }
     @meal = Meal.new
     @meals = @group.meals.order(:meal_date)
     @average = MetricsService.new(@meals).meals_average
