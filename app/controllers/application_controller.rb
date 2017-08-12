@@ -5,14 +5,14 @@ class ApplicationController < ActionController::Base
   before_action :require_login
 
   def require_login
-    return unless logged_in?
+    return if logged_in?
 
     flash[:danger] = 'You must be logged in to access this section'
     redirect_to login_path
   end
 
   def dev_only
-    return unless Rails.env.development?
+    return if Rails.env.development?
 
     raise ActionController::RoutingError, 'Not Found'
   end
