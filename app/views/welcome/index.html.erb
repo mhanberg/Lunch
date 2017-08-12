@@ -4,7 +4,7 @@
     <div id='todayCalendar'></div>
   </div>
   <div class='col-xs-3'>
-    <div id='yesterdayCalendar'></div>
+    <div id='tomorrowCalendar'></div>
   </div>
   <div class='col-xs-3'>
     <canvas id='pie' height='200' width='200'></canvas>
@@ -21,14 +21,14 @@
         eventClick: function(e) { openModal(e); }
     });
 
-    $('#yesterdayCalendar').fullCalendar({
+    $('#tomorrowCalendar').fullCalendar({
       events: '/calendar',
       defaultView: 'basicDay',
       header: { left: 'title', center: false, right: false },
       height: 'auto',
       eventClick: function(e) { openModal(e); }
     })
-    .fullCalendar('prev');
+    .fullCalendar('next');
 
     $.ajax({
       method: 'get',
