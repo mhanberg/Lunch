@@ -1,13 +1,18 @@
 <div id='mealModal'></div>
- <div class='row'>
-  <div class='col-sm-3'>
+<div class='row'>
+  <div class='col-sm-4'>
     <div id='todayCalendar'></div>
   </div>
-  <div class='col-sm-3'>
+  <div class='col-sm-4'>
     <div id='tomorrowCalendar'></div>
   </div>
-  <div class='col-sm-3'>
+  <div class='col-sm-4'>
     <canvas id='pie' height='200' width='200'></canvas>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-4'>
+    <canvas id='histogram' height='200' width='200'></canvas>
   </div>
 </div>
 
@@ -33,23 +38,17 @@
     $.ajax({
       method: 'get',
       url: '/response_pie',
-      success: function(data) {
+      success: function(response) {
         var ctx = $('#pie');
         var myChart = new Chart(ctx, {
           type: 'pie',
           data: {
             datasets: [{
-                data: [
-                  data['no_response'],
-                  data['0'],
-                  data['1'],
-                  data['2'],
-                  data['3'],
-                  data['4']
-                ],
-                backgroundColor: ['#FF0000', '#4B0082', '#0000FF', '#00FF00', '#FFFF00', '#FF7F00']
+                data: response.data,
+                backgroundColor: ['#4a010c', '#960038', '#f60239', '#4c9d49', '#005b00', '#000000'],
+                label: 'Total Score Distribution'
             }],
-            labels: ['No Response', 'Awful', 'Bad', 'Meh', 'Good', 'Amazing']
+            labels: response.labels
           }
         });
       },
@@ -57,6 +56,29 @@
         console.log("Reponse pie ajax failed dude");
       }
     });
+
+    $.ajax({
+      method: 'get',
+      url: '/meal_type_histogram',
+      success: function(response) {
+        var ctx = $('#histogram');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            datasets: [{
+              label: 'Average Score by Meal type',
+              data: response.data,
+              backgroundColor: ['#FF0000', '#4B0082', '#0000FF']
+            }],
+            labels: response.labels
+          },
+          options: { scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
+        });
+      },
+      error: function() {
+        console.log("meal_type_histogram ajax failed dude");
+      }
+    })
   });
 
   function openModal(event) {

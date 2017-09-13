@@ -4,7 +4,7 @@ class MetricsService
   end
 
   def meals_average
-    ratings = @meals.map(&:ratings).to_a.flatten
+    ratings = @meals.map(&:ratings).flatten
 
     avg = avg(ratings)
     if avg.nan?
@@ -15,24 +15,30 @@ class MetricsService
   end
 
   def available_responses_pie_chart
-    chart = {
-      'no_response' => 0,
-      '0' => 0,
-      '1' => 0,
-      '2' => 0,
-      '3' => 0,
-      '4' => 0
+    result = {
+      data: [0, 0, 0, 0, 0, 0],
+      labels: [Rating.scores.keys, 'No Response'].flatten
     }
 
     @meals.each do |meal|
       meal.ratings.each do |rating|
-        chart[rating.score.to_s] += 1
+        result[:data][rating.score] += 1
       end.empty? && begin
-        chart['no_response'] += 1
+        result[:data][5] += 1
       end
     end
 
-    chart
+    result
+  end
+
+  def meal_type_histogram
+    result = { data: [], labels: Meal.categories.keys }
+
+    Meal.categories.keys.each do |category|
+      result[:data] << avg(@meals.select { |m| m.send("#{category}?") }.map(&:ratings).flatten)
+    end
+
+    result
   end
 
   private

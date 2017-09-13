@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   resources :ratings
 
   get '/response_pie', to: 'metrics#response_pie'
+  get '/meal_type_histogram', to: 'metrics#meal_type_histogram'
 end
