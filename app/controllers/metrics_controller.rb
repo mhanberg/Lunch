@@ -11,6 +11,12 @@ class MetricsController < ApplicationController
     render json: response
   end
 
+  def line_chart
+    response = MetricsService.new(past_meals.order(:meal_date)).line_chart
+
+    render json: response
+  end
+
   private
 
   def past_meals

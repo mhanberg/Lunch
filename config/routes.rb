@@ -23,4 +23,5 @@ Rails.application.routes.draw do
 
   get '/response_pie', to: 'metrics#response_pie'
   get '/meal_type_histogram', to: 'metrics#meal_type_histogram'
+  get '/line_chart', to: 'metrics#line_chart'
 end

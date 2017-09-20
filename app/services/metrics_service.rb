@@ -41,6 +41,18 @@ class MetricsService
     result
   end
 
+  def line_chart
+    ratings = Rating.joins(:meal)
+                    .group(:meal_date)
+                    .order('meals.meal_date')
+                    .where(meal: @meals)
+                    .select('avg(ratings.score) as average, meals.meal_date')
+    {
+      data: ratings.map { |r| { y: r.average, x: r.meal_date } },
+      labels: Rating.scores.invert
+    }
+  end
+
   private
 
   def avg(ratings)
