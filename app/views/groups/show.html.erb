@@ -3,19 +3,6 @@
 </div>
 <div class='row'>
   <div class='col-md-6 col-xs-12'>
-    <h3 class='center'>Metrics</h3>
-    <table class='table table-striped table-condensed'>
-      <tr>
-        <th>Name</th>
-        <th>Score</th>
-      </tr>
-      <tr>
-        <td>Average</td>
-        <td><%= @average %></td>
-      </tr>
-    </table>
-  </div>
-  <div class='col-md-6 col-xs-12'>
     <% if current_user.admin?(@group.id) %>
       <%= form_tag('/add_user_to_group') do %>
         <input type='hidden' name='groupId' value='<%= @group.id %>'>
@@ -56,29 +43,6 @@
       </table>
     <% else %>
       <h3 class='col-xs-12'>This group has no members :(</h3>
-    <% end %>
-  </div>
-  <div class='col-md-6 col-xs-12'>
-    <% if @meals.any? %>
-      <h3 class='center'>Meals</h3>
-      <table class='table table-striped table-condensed'>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Date</th>
-        </tr>
-        <% @meals.each do |meal| %>
-          <tr>
-            <td><%= meal.name %></td>
-            <td><%= meal.description %></td>
-            <td><%= meal.category %></td>
-            <td><%= meal.meal_date %></td>
-          </tr>
-        <% end %>
-      </table>
-    <% else %>
-      <h3>This group has no meals scheduled ¯\_(ツ)_/¯</h3>
     <% end %>
   </div>
 </div>
