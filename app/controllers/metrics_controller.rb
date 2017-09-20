@@ -14,9 +14,8 @@ class MetricsController < ApplicationController
   private
 
   def past_meals
-    groups = GroupsUser.where(user: current_user).map(&:group)
-    Meal.where('meal_date < ?', Date.today)
-        .where(group: groups)
+    Meal.where('meal_date <= ?', Date.today)
+        .where(group: current_user.default_group)
         .includes(:ratings)
   end
 end

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get '/debug', to: 'sessions#debug'
 
   resources :users, only: [:new, :create]
+  post '/default_group', to: 'users#default_group'
+
   resources :meals
   get '/calendar', to: 'meals#calendar'
   resources :ratings

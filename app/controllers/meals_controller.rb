@@ -46,7 +46,7 @@ class MealsController < ApplicationController
 
   def calendar
     meals = Meal.where(
-      group_id: current_user.groups.map(&:id),
+      group: current_user.default_group,
       meal_date: (params[:start]..params[:end])
     ).includes(:ratings)
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170618190306) do
+ActiveRecord::Schema.define(version: 20170913235136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,10 +58,12 @@ ActiveRecord::Schema.define(version: 20170618190306) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "remember_digest"
+    t.integer  "default_group_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "users", "groups", column: "default_group_id"
 end
