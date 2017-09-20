@@ -8,8 +8,8 @@ end
 
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.11'
-gem 'bootstrap_form'
 gem 'bootstrap-sass', '3.3.6'
+gem 'bootstrap_form'
 gem 'coffee-rails', '~> 4.2'
 gem 'foreman'
 gem 'jbuilder', '~> 2.5'
