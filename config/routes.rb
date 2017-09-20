@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   get '/welcome', to: 'welcome#welcome'
 
   resources :groups
-  post '/AddUserToGroup', to: 'groups#AddUserToGroup'
-  post '/DeleteUserFromGroup', to: 'groups#DeleteUserFromGroup'
+  post '/add_user_to_group', to: 'groups#add_user_to_group'
+  post '/delete_user_from_group', to: 'groups#delete_user_from_group'
 
   get '/signup', to: 'users#new'
 
