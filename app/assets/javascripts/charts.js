@@ -1,4 +1,4 @@
-const BarChart = (ctx, data, labels) => {
+function BarChart(ctx, data, labels) {
   return new Chart(ctx, {
     type: 'bar',
     data: {
@@ -22,7 +22,7 @@ const BarChart = (ctx, data, labels) => {
   })
 }
 
-const PieChart = (ctx, data, labels) => {
+function PieChart(ctx, data, labels) {
   return new Chart(ctx, {
     type: 'pie',
     data: {
@@ -35,7 +35,7 @@ const PieChart = (ctx, data, labels) => {
   })
 }
 
-const LineChart = (ctx, data, labels) => {
+function LineChart(ctx, data, labels) {
   return new Chart(ctx, {
     type: 'line',
     data: {

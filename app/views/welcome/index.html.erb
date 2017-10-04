@@ -102,17 +102,14 @@
     $.ajax({
       method: 'get',
       url: '/line_chart',
-      success: response => LineChart($('#line'), response.data, response.labels),
-      error: () => console.log("line chart failed brotato")
+      success: function(response) { LineChart($('#line'), response.data, response.labels) },
+      error: function() { console.log("line chart failed brotato") }
     })
-
   })
-
-
 
   function openModal(event) {
     $('#mealModal').replaceWith('<%= j render 'meals/meal-modal' %>')
-    const url = event.rating ? `ratings/${event.rating.id}/edit` : "ratings/new"
+    var url = event.rating ? `ratings/${event.rating.id}/edit` : "ratings/new"
     $.ajax({
       method: 'get',
       url: url,
