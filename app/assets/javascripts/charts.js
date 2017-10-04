@@ -19,7 +19,7 @@ function BarChart(ctx, data, labels) {
         }
       }
     }
-  })
+  });
 }
 
 function PieChart(ctx, data, labels) {
@@ -32,7 +32,7 @@ function PieChart(ctx, data, labels) {
       }],
       labels: labels
     }
-  })
+  });
 }
 
 function LineChart(ctx, data, labels) {
@@ -69,5 +69,5 @@ function LineChart(ctx, data, labels) {
       },
       legend: { display: false },
     }
-  })
+  });
 }

@@ -66,7 +66,7 @@
         header: { left: 'title', center: false, right: false },
         height: 'auto',
         eventClick: function(e) { openModal(e) }
-    })
+    });
 
     $('#tomorrowCalendar').fullCalendar({
       events: '/calendar',
@@ -75,7 +75,7 @@
       height: 'auto',
       eventClick: function(e) { openModal(e) }
     })
-    .fullCalendar('next')
+    .fullCalendar('next');
 
     $.ajax({
       method: 'get',
@@ -86,7 +86,7 @@
       error: function() {
         console.log("Reponse pie ajax failed dude")
       }
-    })
+    });
 
     $.ajax({
       method: 'get',
@@ -97,19 +97,19 @@
       error: function() {
         console.log("meal_type_histogram ajax failed dude")
       }
-    })
+    });
 
     $.ajax({
       method: 'get',
       url: '/line_chart',
       success: function(response) { LineChart($('#line'), response.data, response.labels) },
       error: function() { console.log("line chart failed brotato") }
-    })
-  })
+    });
+  });
 
   function openModal(event) {
-    $('#mealModal').replaceWith('<%= j render 'meals/meal-modal' %>')
-    var url = event.rating ? `ratings/${event.rating.id}/edit` : "ratings/new"
+    $('#mealModal').replaceWith('<%= j render 'meals/meal-modal' %>');
+    var url = event.rating ? `ratings/${event.rating.id}/edit` : "ratings/new";
     $.ajax({
       method: 'get',
       url: url,
@@ -123,6 +123,6 @@
       error: function() {
         alert("Fail! You suck!")
       }
-    })
+    });
   }
 </script>
