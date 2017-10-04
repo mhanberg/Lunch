@@ -20,7 +20,7 @@ class MetricsController < ApplicationController
   private
 
   def past_meals
-    Meal.where('meal_date <= ?', Date.today)
+    Meal.where(meal_date: 3.month.ago..Date.today)
         .where(group: current_user.default_group)
         .includes(:ratings)
   end
