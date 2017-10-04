@@ -12,8 +12,9 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = 'Welcome to lunch! Where your freshman 15 is born.'
-      redirect_to @user
+      redirect_to root_path
     else
+      flash[:danger] = @user.errors
       render 'new'
     end
   end

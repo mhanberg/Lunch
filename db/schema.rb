@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913235136) do
+ActiveRecord::Schema.define(version: 20171004211209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,5 +65,4 @@ ActiveRecord::Schema.define(version: 20170913235136) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
-  add_foreign_key "users", "groups", column: "default_group_id"
 end

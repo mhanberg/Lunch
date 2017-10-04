@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get '/welcome', to: 'welcome#welcome'
 
-  resources :groups
+  resources :groups, except: :index
   post '/add_user_to_group', to: 'groups#add_user_to_group'
   post '/delete_user_from_group', to: 'groups#delete_user_from_group'
 
@@ -17,9 +17,9 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   post '/default_group', to: 'users#default_group'
 
-  resources :meals
+  resources :meals, except: [:show, :index]
   get '/calendar', to: 'meals#calendar'
-  resources :ratings
+  resources :ratings, only: [:new, :create, :edit, :update]
 
   get '/response_pie', to: 'metrics#response_pie'
   get '/meal_type_histogram', to: 'metrics#meal_type_histogram'

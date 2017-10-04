@@ -1,8 +1,4 @@
 class RatingsController < ApplicationController
-  def index
-    @ratings = Rating.where(meal_id: params[:meal_id])
-  end
-
   def new
     @rating = Rating.new
     render layout: false

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :groups_users, dependent: :destroy
   has_many :groups, through: :groups_users
   has_many :ratings
-  belongs_to :default_group, class_name: 'Group'
+  belongs_to :default_group, class_name: 'Group', optional: true
   attr_accessor :remember_token
   attr_accessor :role
 

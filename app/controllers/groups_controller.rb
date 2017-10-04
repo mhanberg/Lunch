@@ -1,10 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:edit, :update, :destroy]
 
-  def index
-    @groups = current_user.groups
-  end
-
   def show
     @group = Group.includes(:users, meals: :ratings)
                   .find(params[:id])
