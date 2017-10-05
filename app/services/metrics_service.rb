@@ -32,7 +32,7 @@ class MetricsService
   end
 
   def meal_type_histogram
-    result = { data: [], labels: Meal.categories.keys }
+    result = { data: [], labels_x: Meal.categories.keys, labels_y: Rating.scores.invert }
 
     Meal.categories.keys.each do |category|
       result[:data] << avg(@meals.select { |m| m.send("#{category}?") }.map(&:ratings).flatten)

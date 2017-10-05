@@ -1,4 +1,4 @@
-function BarChart(ctx, data, labels) {
+function BarChart(ctx, data, labels_x, labels_y) {
   return new Chart(ctx, {
     type: 'bar',
     data: {
@@ -6,10 +6,10 @@ function BarChart(ctx, data, labels) {
         data: data,
         backgroundColor: ['#FF0000', '#4B0082', '#0000FF']
       }],
-      labels: labels
+      labels: labels_x
     },
     options: {
-      scales: { yAxes: [{ ticks: { beginAtZero: true } }] },
+      scales: { yAxes: [{ ticks: { beginAtZero: true, max: 4.0, callback: function(value, index, values) { return labels_y[value] } } }] },
       legend: { display: false },
       tooltips: {
         callbacks: {
@@ -56,7 +56,7 @@ function LineChart(ctx, data, labels) {
           ticks: {
             beginAtZero: true,
             stepSize: 1,
-            callback: (value, index, values) => labels[value]
+            callback: function(value, index, values) { return labels[value] }
           }
         }],
         xAxes: [{

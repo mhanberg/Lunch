@@ -14,6 +14,9 @@ import fullCalendar from 'fullcalendar'
 import bootstrap from 'bootstrap'
 import bootstrapDatepicker from 'bootstrap-datepicker'
 import chart from 'chart.js'
+import Spinner from 'spin.js'
+
+window.Spinner = Spinner
 
 // css
 import 'fullcalendar/dist/fullcalendar.css'
