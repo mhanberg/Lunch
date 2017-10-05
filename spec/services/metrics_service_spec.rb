@@ -84,7 +84,8 @@ describe MetricsService do
 
       expected = {
         data: [4, 3.67, 1.43],
-        labels: Meal.categories.keys
+        labels_x: Meal.categories.keys,
+        labels_y: Rating.scores.invert
       }
 
       actual = MetricsService.new([breakfast, lunch, dinner]).meal_type_histogram
